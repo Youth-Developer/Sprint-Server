@@ -4,6 +4,10 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from './config/configuration';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { MemberModule } from './member/member.module';
+import { BoardModule } from './board/board.module';
+import { AnswerModule } from './answer/answer.module';
+import { SettingsModule } from './settings/settings.module';
 
 @Module({
   imports: [
@@ -26,6 +30,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         logging: true,
       }),
     }),
+    MemberModule,
+    BoardModule,
+    AnswerModule,
+    SettingsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
