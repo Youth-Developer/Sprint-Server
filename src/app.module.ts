@@ -26,7 +26,7 @@ import { SettingsModule } from './settings/settings.module';
         password: configService.get('database.password'),
         database: configService.get('database.name'),
         entities: ['dist/**/*.entity{.ts,.js}'],
-        synchronize: true, // TODO: 엔티티에 수정이 없다면 false로 변경
+        synchronize: false, // TODO: 엔티티에 수정이 없다면 false로 변경
         logging: true,
       }),
     }),
