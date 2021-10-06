@@ -3,7 +3,7 @@ import { AppModule } from './app.module';
 import { Logger } from '@nestjs/common';
 
 declare const module: any;
-const port = process.env.PORT || 8080;
+const port = parseInt(process.env.PORT, 10) || 8080;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
