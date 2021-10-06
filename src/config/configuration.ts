@@ -1,4 +1,3 @@
-import 'dotenv/config';
 export default () => ({
   database: {
     type: 'mysql',
