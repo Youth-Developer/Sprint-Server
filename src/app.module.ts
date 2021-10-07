@@ -28,6 +28,10 @@ import { SettingsModule } from './settings/settings.module';
         entities: ['dist/**/*.entity{.ts,.js}'],
         synchronize: false, // TODO: 엔티티에 수정이 없다면 false로 변경
         logging: true,
+        migrations: ['src/migration/**/*.ts'],
+        cli: {
+          migrationsDir: 'src/migration',
+        },
       }),
     }),
     MemberModule,
