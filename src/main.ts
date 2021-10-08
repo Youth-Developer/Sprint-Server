@@ -17,11 +17,7 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   await app.listen(port);
-  Logger.log(`Server is running on http://localhost:${port}`, 'Bootstrap');
-  Logger.log(
-    `Swagger Document is running on http://localhost:${port}/api`,
-    'SwaggerDocument',
-  );
+  Logger.log(`Server is running on http://localhost:${port}/api`, 'Bootstrap');
 
   if (module.hot) {
     module.hot.accept();
