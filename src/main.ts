@@ -27,5 +27,6 @@ async function bootstrap() {
     module.hot.accept();
     module.hot.dispose(() => app.close());
   }
+  console.log(typeof process.env.DB_PW);
 }
 bootstrap();
