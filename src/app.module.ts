@@ -6,6 +6,7 @@ import { MemberModule } from './member/member.module';
 import { BoardModule } from './board/board.module';
 import { AnswerModule } from './answer/answer.module';
 import { SettingsModule } from './settings/settings.module';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { SettingsModule } from './settings/settings.module';
     BoardModule,
     AnswerModule,
     SettingsModule,
+    DatabaseModule,
   ],
   controllers: [AppController],
   providers: [AppService],
