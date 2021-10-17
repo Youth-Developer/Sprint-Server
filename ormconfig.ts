@@ -4,7 +4,7 @@ import * as dotenv from 'dotenv';
 
 const entity = []; // 여기에 entity를 넣어주세요
 dotenv.config();
-export const ormconfig: TypeOrmModuleOptions = {
+const ormconfig: TypeOrmModuleOptions = {
   type: 'mysql',
   host: process.env.DB_HOST,
   port: parseInt(process.env.DB_PORT, 10),
@@ -21,3 +21,5 @@ export const ormconfig: TypeOrmModuleOptions = {
   logging: true,
   autoLoadEntities: true,
 };
+
+export default ormconfig;
