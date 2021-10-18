@@ -2,16 +2,16 @@ import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('member')
 export default class MemberEntity extends BaseEntity {
-  @PrimaryGeneratedColumn({ type: 'int', name: 'idx' })
+  @PrimaryGeneratedColumn()
   idx: number;
 
-  @Column({ nullable: false, unique: true, length: 30 })
+  @Column({ nullable: false, unique: true })
   email: string;
 
-  @Column({ nullable: false, unique: true, length: 30 })
+  @Column({ nullable: false, unique: true })
   nickname: string;
 
-  @Column({ nullable: false, unique: true, length: 255, select: false })
+  @Column({ nullable: false, unique: true, select: false })
   password: string;
 
   @Column({ nullable: true, default: null })

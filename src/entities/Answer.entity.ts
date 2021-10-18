@@ -7,13 +7,10 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('question')
-export default class QuestionEntity extends BaseEntity {
+@Entity('answer')
+export default class AnswerEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
-  question_id: number;
-
-  @Column({ nullable: false, unique: true })
-  subject: string;
+  answer_id: number;
 
   @Column({ nullable: false })
   contents: string;
