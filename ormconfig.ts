@@ -12,14 +12,13 @@ const ormconfig: TypeOrmModuleOptions = {
   password: process.env.DB_PW,
   database: process.env.DB_NAME,
   entities: entities,
-  migrations: [join(__dirname + '/migration/**/*{.ts,.js}')],
+  migrations: [join(__dirname, '/migration/**/*{.ts,.js}')],
   cli: {
     entitiesDir: 'src/entities',
     migrationsDir: 'src/migration',
   },
   synchronize: true,
   logging: true,
-  autoLoadEntities: true,
 };
 
 export default ormconfig;
