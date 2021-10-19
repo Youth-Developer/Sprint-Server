@@ -10,7 +10,7 @@ import {
 @Entity('answer')
 export default class AnswerEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
-  answer_id: number;
+  idx: number;
 
   @Column({ nullable: false })
   contents: string;
@@ -18,9 +18,9 @@ export default class AnswerEntity extends BaseEntity {
   @Column({ nullable: false, default: 0 })
   like: number;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 }
