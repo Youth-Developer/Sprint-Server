@@ -1,7 +1,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { join } from 'path';
 import * as dotenv from 'dotenv';
-import entities from 'src/entities/index';
+import entities from './src/entities/index';
 
 dotenv.config();
 const ormconfig: TypeOrmModuleOptions = {
@@ -17,7 +17,7 @@ const ormconfig: TypeOrmModuleOptions = {
     entitiesDir: 'src/entities',
     migrationsDir: 'src/migration',
   },
-  synchronize: true,
+  synchronize: false,
   logging: true,
 };
 
