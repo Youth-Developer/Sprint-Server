@@ -1,29 +1,8 @@
-import {
-  BaseEntity,
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity } from 'typeorm';
+import AnswerEntity from './Answer.entity';
 
 @Entity('question')
-export default class QuestionEntity extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  question_id: number;
-
-  @Column({ nullable: false, unique: true })
-  subject: string;
-
+export default class QuestionEntity extends AnswerEntity {
   @Column({ nullable: false })
-  contents: string;
-
-  @Column({ nullable: false, default: 0 })
-  like: number;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
+  title: string;
 }
