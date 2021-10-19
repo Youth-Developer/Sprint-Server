@@ -19,6 +19,7 @@ const ormconfig: TypeOrmModuleOptions = {
   },
   synchronize: false,
   logging: true,
+  keepConnectionAlive: true,
 };
 
 export default ormconfig;
