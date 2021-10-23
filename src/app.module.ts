@@ -7,6 +7,7 @@ import { AnswerModule } from './answer/answer.module';
 import { SettingsModule } from './settings/settings.module';
 import { DatabaseModule } from './database/database.module';
 import { QuestionPhotoModule } from './question-photo/question-photo.module';
+import { AnswerPhotoModule } from './answer-photo/answer-photo.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { QuestionPhotoModule } from './question-photo/question-photo.module';
     SettingsModule,
     DatabaseModule,
     QuestionPhotoModule,
+    AnswerPhotoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
