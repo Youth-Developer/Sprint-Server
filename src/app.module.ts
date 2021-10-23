@@ -6,6 +6,7 @@ import { MemberModule } from './member/member.module';
 import { AnswerModule } from './answer/answer.module';
 import { SettingsModule } from './settings/settings.module';
 import { DatabaseModule } from './database/database.module';
+import { QuestionPhotoModule } from './question-photo/question-photo.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { DatabaseModule } from './database/database.module';
     AnswerModule,
     SettingsModule,
     DatabaseModule,
+    QuestionPhotoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
