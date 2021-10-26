@@ -1,5 +1,6 @@
 import UserEntity from './User.entity';
 import QuestionEntity from './Question.entity';
 import AnswerEntity from './Answer.entity';
-
-export default [UserEntity, QuestionEntity, AnswerEntity];
+import QuestionPhotoEntity from './QuestionPhoto.entity';
+import AnswerPhotoEntity from './AnswerPhoto.entity';
+export default [UserEntity, QuestionEntity, AnswerEntity, QuestionPhotoEntity, AnswerPhotoEntity];
