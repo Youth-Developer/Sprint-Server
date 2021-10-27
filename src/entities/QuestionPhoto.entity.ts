@@ -6,5 +6,5 @@ export default class QuestionPhotoEntity {
   idx: number;
 
   @Column({ name: 'image_path', nullable: true })
-  imagePath: string;
+  imagePath: string | null;
 }
