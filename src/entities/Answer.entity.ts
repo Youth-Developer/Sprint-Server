@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 
 @Entity('answer')
-export default class AnswerEntity extends BaseEntity {
+export default class Answer extends BaseEntity {
   @PrimaryGeneratedColumn()
   idx: number;
 
