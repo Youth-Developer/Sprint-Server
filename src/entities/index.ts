@@ -1,12 +1,12 @@
-import UserEntity from './User.entity';
-import QuestionEntity from './Question.entity';
-import AnswerEntity from './Answer.entity';
-import QuestionPhotoEntity from './QuestionPhoto.entity';
-import AnswerPhotoEntity from './AnswerPhoto.entity';
+import User from './User.entity';
+import Question from './Question.entity';
+import Answer from './Answer.entity';
+import QuestionPhoto from './QuestionPhoto.entity';
+import AnswerPhoto from './AnswerPhoto.entity';
 export default [
-  UserEntity,
-  QuestionEntity,
-  AnswerEntity,
-  QuestionPhotoEntity,
-  AnswerPhotoEntity,
+  User,
+  Question,
+  Answer,
+  QuestionPhoto,
+  AnswerPhoto,
 ];
