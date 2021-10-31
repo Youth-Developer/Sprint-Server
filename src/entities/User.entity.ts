@@ -22,13 +22,13 @@ export default class User extends BaseEntity {
   password: string;
 
   @Column({ nullable: true, default: null })
-  bio: string;
+  bio: string | null;
 
   @Column({ nullable: true, default: null })
-  github_address: string;
+  github_address: string | null;
 
   @Column({ nullable: true, default: null })
-  discord_tag: string;
+  discord_tag: string | null;
 
   @BeforeInsert()
   @BeforeUpdate()
