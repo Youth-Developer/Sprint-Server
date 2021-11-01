@@ -34,4 +34,7 @@ export default class Question extends BaseEntity {
   })
   @JoinColumn({ name: 'user_idx' })
   user: User;
+
+  @OneToMany(() => Answer, (answer) => answer.idx)
+  answer: Answer[];
 }
