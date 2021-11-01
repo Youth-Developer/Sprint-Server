@@ -4,12 +4,13 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  ManyToOne,
+  ManyToOne, OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import Question from './Question.entity';
 import User from './User.entity';
+import AnswerPhoto from './AnswerPhoto.entity';
 
 @Entity('answer')
 export default class Answer extends BaseEntity {
@@ -39,4 +40,7 @@ export default class Answer extends BaseEntity {
   })
   @JoinColumn({ name: 'user_idx' })
   user: User;
+
+  @OneToMany( () => AnswerPhoto, (answerPhoto) => answerPhoto.idx)
+  answerPhoto: AnswerPhoto[];
 }
