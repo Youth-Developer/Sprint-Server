@@ -9,6 +9,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import Question from './Question.entity';
+import User from './User.entity';
 
 @Entity('answer')
 export default class Answer extends BaseEntity {
@@ -32,4 +33,10 @@ export default class Answer extends BaseEntity {
   })
   @JoinColumn({ name: 'question_idx' })
   question: Question;
+
+  @ManyToOne(() => User, (user) => user.idx, {
+    onDelete: 'CASCADE'
+  })
+  @JoinColumn({ name: 'user_idx' })
+  user: User;
 }

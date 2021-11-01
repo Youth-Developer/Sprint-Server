@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import Question from './Question.entity';
+import Answer from './Answer.entity';
 @Entity('user')
 export default class User extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -35,6 +36,10 @@ export default class User extends BaseEntity {
 
   @OneToMany(() => Question, (question) => question.idx)
   question: Question[];
+
+  @OneToMany(() => Answer, (answer) => answer.idx)
+  @JoinColumn({ name: 'answer_idx' })
+  answer: Answer[];
 
   @BeforeInsert()
   @BeforeUpdate()
