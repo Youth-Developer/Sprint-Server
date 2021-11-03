@@ -9,7 +9,7 @@ export default class AnswerPhoto {
   @Column({ name: 'image_path', nullable: true })
   imagePath: string | null;
 
-  @ManyToOne(() => Answer, (question) => question.idx, {
+  @ManyToOne(() => Answer, (question) => question.answerPhoto, {
     onDelete: 'CASCADE'
   })
   @JoinColumn({ name: 'answer_idx' })

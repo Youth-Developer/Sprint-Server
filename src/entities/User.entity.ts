@@ -34,10 +34,10 @@ export default class User extends BaseEntity {
   @Column({ nullable: true, default: null })
   discord_tag: string | null;
 
-  @OneToMany(() => Question, (question) => question.idx)
+  @OneToMany(() => Question, (question) => question.user)
   question: Question[];
 
-  @OneToMany(() => Answer, (answer) => answer.idx)
+  @OneToMany(() => Answer, (answer) => answer.user)
   @JoinColumn({ name: 'answer_idx' })
   answer: Answer[];
 
