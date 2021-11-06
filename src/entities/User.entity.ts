@@ -9,7 +9,7 @@ export default class User extends BaseEntity {
   email: string;
 
   @Column({ nullable: false, unique: true })
-  nickname: string;
+  username: string;
 
   @Column({ nullable: false, unique: true, select: false })
   password: string;
