@@ -3,9 +3,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne, OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import Question from './Question.entity';
+import User from './User.entity';
+import AnswerPhoto from './AnswerPhoto.entity';
 
 @Entity('answer')
 export default class Answer extends BaseEntity {
@@ -23,4 +28,19 @@ export default class Answer extends BaseEntity {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  @ManyToOne(() => Question, (question) => question.answer, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'question_idx' })
+  question: Question;
+
+  @ManyToOne(() => User, (user) => user.answer, {
+    onDelete: 'CASCADE'
+  })
+  @JoinColumn({ name: 'user_idx' })
+  user: User;
+
+  @OneToMany( () => AnswerPhoto, (answerPhoto) => answerPhoto.answer)
+  answerPhoto: AnswerPhoto[];
 }

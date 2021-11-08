@@ -4,9 +4,13 @@ import {
   BeforeUpdate,
   Column,
   Entity,
+  JoinColumn,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import Question from './Question.entity';
+import Answer from './Answer.entity';
 @Entity('user')
 export default class User extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -29,6 +33,13 @@ export default class User extends BaseEntity {
 
   @Column({ nullable: true, default: null })
   discord_tag: string | null;
+
+  @OneToMany(() => Question, (question) => question.user)
+  question: Question[];
+
+  @OneToMany(() => Answer, (answer) => answer.user)
+  @JoinColumn({ name: 'answer_idx' })
+  answer: Answer[];
 
   @BeforeInsert()
   @BeforeUpdate()
