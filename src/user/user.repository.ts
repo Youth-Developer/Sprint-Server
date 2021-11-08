@@ -4,12 +4,12 @@ import User from '../entities/User.entity';
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
   async findUserById(idx: number): Promise<User | undefined> {
-    return await this.findOne({ idx: idx });
+    return await this.findOne({ where: { idx: idx } });
   }
   async findUserByName(username: string): Promise<User | undefined> {
-    return await this.findOne({ username: username });
+    return await this.findOne({ where: { username: username } });
   }
   async findUserByEmail(email: string): Promise<User | undefined> {
-    return await this.findOne({ email: email });
+    return await this.findOne({ where: { email: email } });
   }
 }
