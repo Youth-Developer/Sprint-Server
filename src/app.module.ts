@@ -6,6 +6,7 @@ import { DatabaseModule } from './database/database.module';
 import { QuestionPhotoModule } from './question-photo/question-photo.module';
 import { AnswerPhotoModule } from './answer-photo/answer-photo.module';
 import { UserModule } from './user/user.module';
+import { QuestionModule } from './question/question.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { UserModule } from './user/user.module';
     QuestionPhotoModule,
     AnswerPhotoModule,
     UserModule,
+    QuestionModule,
   ],
 })
 export class AppModule {}
