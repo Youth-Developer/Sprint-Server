@@ -14,7 +14,7 @@ export class RegisterDto {
     required: true,
   })
   @IsNotEmpty({ message: '이메일을 입력해주세요!' })
-  @IsString()
+  @IsString({ message: '이메일은 문자열이여야 합니다.' })
   @Matches(/^[a-zA-Z0-9]+@gsm.hs.kr$/)
   readonly email!: string;
 
@@ -24,7 +24,7 @@ export class RegisterDto {
     required: true,
   })
   @IsNotEmpty({ message: '이름을 입력해주세요!' })
-  @IsString()
+  @IsString({ message: '사용자 이름은 문자열이여야 합니다.' })
   @MaxLength(10, { message: '닉네임이 너무 길어요!' })
   readonly username!: string;
 
@@ -34,7 +34,7 @@ export class RegisterDto {
     required: true,
   })
   @IsNotEmpty({ message: '비밀번호를 입력해주세요!' })
-  @IsString()
+  @IsString({ message: '비밀번호는 문자열이여야 합니다.' })
   @MinLength(4, { message: '비밀번호가 너무 짧습니다!' })
   readonly password!: string;
 }
