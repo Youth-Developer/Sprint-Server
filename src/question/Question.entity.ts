@@ -9,6 +9,8 @@ import {
 import User from '../user/User.entity';
 import Answer from '../answer/Answer.entity';
 import QuestionPhoto from '../question-photo/QuestionPhoto.entity';
+import Category from '../category/Category.entity';
+import { getEnabledCategories } from 'trace_events';
 
 @Entity('question')
 export default class Question extends BaseEntity {
@@ -41,4 +43,7 @@ export default class Question extends BaseEntity {
 
   @OneToMany( () => QuestionPhoto, (questionPhoto) => questionPhoto.question)
   questionPhoto: QuestionPhoto[];
+
+  @OneToMany( () => Category, (category) => category.question)
+  category: Category;
 }
