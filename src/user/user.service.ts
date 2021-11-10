@@ -13,9 +13,9 @@ export class UserService {
   constructor(private readonly userRepository: UserRepository) {}
 
   async register(registerDto: RegisterDto): Promise<void> {
-    const { username } = registerDto;
+    const { email } = registerDto;
     try {
-      const user: User = await this.userRepository.findOne({ username });
+      const user: User = await this.userRepository.findOne({ email });
       if (!user) {
         const result: User = await this.userRepository.create(registerDto);
         await this.userRepository.save(result);
