@@ -12,6 +12,7 @@ async function bootstrap() {
     .setTitle('Sprint')
     .setDescription('Sprint 프로젝트를 위한 API 문서')
     .setVersion('1.0')
+    .setBasePath('api')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
