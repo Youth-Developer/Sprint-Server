@@ -6,9 +6,9 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import User from '../user/User.entity';
-import Answer from '../answer/Answer.entity';
-import QuestionPhoto from '../question-photo/QuestionPhoto.entity';
+import User from '../user/user.entity';
+import Answer from '../answer/answer.entity';
+import QuestionPhoto from '../question-photo/questionPhoto.entity';
 
 @Entity('question')
 export default class Question extends BaseEntity {

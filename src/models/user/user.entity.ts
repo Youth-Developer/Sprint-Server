@@ -9,8 +9,8 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import Question from '../question/Question.entity';
-import Answer from '../answer/Answer.entity';
+import Question from '../question/question.entity';
+import Answer from '../answer/answer.entity';
 @Entity('user')
 export default class User extends BaseEntity {
   @PrimaryGeneratedColumn()
