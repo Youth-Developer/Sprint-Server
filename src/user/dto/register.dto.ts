@@ -1,23 +1,24 @@
 import {
-  IsEmail,
   IsNotEmpty,
   IsString,
+  Matches,
   MaxLength,
   MinLength,
 } from 'class-validator';
 
 export class RegisterDto {
-  @IsNotEmpty()
-  @IsEmail()
-  email!: string;
+  @IsNotEmpty({ message: '이메일을 입력해주세요!' })
+  @IsString()
+  @Matches(/^[a-zA-Z0-9]+@gsm.hs.kr$/)
+  readonly email!: string;
 
-  @IsNotEmpty()
+  @IsNotEmpty({ message: '이름을 입력해주세요!' })
   @IsString()
   @MaxLength(10, { message: '닉네임이 너무 길어요!' })
-  username!: string;
+  readonly username!: string;
 
-  @IsNotEmpty()
+  @IsNotEmpty({ message: '비밀번호를 입력해주세요!' })
   @IsString()
   @MinLength(4, { message: '비밀번호가 너무 짧습니다!' })
-  password!: string;
+  readonly password!: string;
 }
