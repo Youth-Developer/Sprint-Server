@@ -7,6 +7,7 @@ import { QuestionPhotoModule } from './question-photo/question-photo.module';
 import { AnswerPhotoModule } from './answer-photo/answer-photo.module';
 import { UserModule } from './user/user.module';
 import { CategoryModule } from './category/category.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { CategoryModule } from './category/category.module';
     AnswerPhotoModule,
     UserModule,
     CategoryModule,
+    AuthModule,
   ],
 })
 export class AppModule {}
