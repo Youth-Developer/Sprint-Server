@@ -7,6 +7,7 @@ import { QuestionPhotoModule } from './question-photo/question-photo.module';
 import { AnswerPhotoModule } from './answer-photo/answer-photo.module';
 import { UserModule } from './user/user.module';
 import { QuestionModule } from './question/question.module';
+import { CategoryModule } from './category/category.module';
 import { AuthModule } from './auth/auth.module';
 
 @Module({
@@ -21,6 +22,7 @@ import { AuthModule } from './auth/auth.module';
     AnswerPhotoModule,
     UserModule,
     QuestionModule,
+    CategoryModule,
     AuthModule,
   ],
 })
