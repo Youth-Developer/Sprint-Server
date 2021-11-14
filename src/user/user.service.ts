@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { UserRepository } from './user.repository';
 import { RegisterDto } from './dto/register.dto';
-import User from '../user/user.entity';
+import User from '../entities/User.entity';
 import { FindOneOptions } from 'typeorm';
 
 @Injectable()
