@@ -39,12 +39,11 @@
     })
     contents!: string;
 
+
     @IsString()
-    @IsNotEmpty()
     @ApiModelProperty({
       example: 'TypeScript',
       description: '카테고리',
-      required: true,
     })
     category: string;
   }
