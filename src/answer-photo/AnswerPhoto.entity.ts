@@ -1,5 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import Answer from '../answer/answer.entity';
+import Answer from '../answer/Answer.entity';
 
 @Entity('answer_photo')
 export default class AnswerPhoto {
