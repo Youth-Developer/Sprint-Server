@@ -5,7 +5,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import Question from '../question/Question.entity';
+import Question from './Question.entity';
 
 @Entity('Category')
 export default class Category {
