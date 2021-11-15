@@ -45,5 +45,5 @@
       example: 'TypeScript',
       description: '카테고리',
     })
-    category: string;
+    category: string[];
   }
