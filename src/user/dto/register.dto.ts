@@ -15,7 +15,9 @@ export class RegisterDto {
   })
   @IsNotEmpty({ message: '이메일을 입력해주세요!' })
   @IsString({ message: '이메일은 문자열이여야 합니다.' })
-  @Matches(/^[a-zA-Z0-9]+@gsm.hs.kr$/)
+  @Matches(/^[a-zA-Z0-9]+@gsm.hs.kr$/, {
+    message: '학교 이메일을 입력해주세요!',
+  })
   readonly email!: string;
 
   @ApiProperty({
