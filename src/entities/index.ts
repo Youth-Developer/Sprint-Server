@@ -1,7 +1,7 @@
-import User from '../user/User.entity';
-import Question from '../question/Question.entity';
-import Answer from '../answer/Answer.entity';
-import QuestionPhoto from '../question-photo/QuestionPhoto.entity';
-import AnswerPhoto from '../answer-photo/AnswerPhoto.entity';
-import Category from '../category/Category.entity';
+import User from './user.entity';
+import Question from './question.entity';
+import Answer from './answer.entity';
+import QuestionPhoto from './questionPhoto.entity';
+import AnswerPhoto from './answerPhoto.entity';
+import Category from './category.entity';
 export default [User, Question, Answer, QuestionPhoto, AnswerPhoto, Category];
