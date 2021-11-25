@@ -6,10 +6,10 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import User from './User.entity';
-import Answer from './Answer.entity';
-import QuestionPhoto from './QuestionPhoto.entity';
-import Category from './Category.entity';
+import User from './user.entity';
+import Answer from './answer.entity';
+import QuestionPhoto from './questionPhoto.entity';
+import Category from './category.entity';
 
 @Entity('question')
 export default class Question extends BaseEntity {
