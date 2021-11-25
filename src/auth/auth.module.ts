@@ -12,8 +12,8 @@ import { UserRepository } from '../user/user.repository';
     TypeOrmModule.forFeature([UserRepository]),
     PassportModule,
     JwtModule.register({
-      secret: process.env.JWT_SECRETE,
-      signOptions: { expiresIn: '60s' },
+      secret: process.env.JWT_ACCESS_TOKEN_SECRET,
+      signOptions: { expiresIn: process.env.JWT_ACCESS_TOKEN_EXPIRATION_TIME },
     }),
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],
