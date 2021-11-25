@@ -1,5 +1,5 @@
 import { EntityRepository, FindOneOptions, Repository } from 'typeorm';
-import User from '../entities/User.entity';
+import User from '../entities/user.entity';
 import { NotFoundException } from '@nestjs/common';
 
 @EntityRepository(User)
