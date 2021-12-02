@@ -1,16 +1,9 @@
-import {
-  Body,
-  Controller,
-  HttpCode,
-  HttpStatus,
-  Post,
-  Req,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { RegisterDto } from './dto/register.dto';
 import { ApiOperation } from '@nestjs/swagger';
 import { AuthService } from '../auth/auth.service';
-import { LocalAuthGuard } from '../auth/guards/local-auth.guard';
+import { SignInDto } from './dto/sign-in.dto';
+import User from '../entities/user.entity';
 
 @Controller('user')
 export class UserController {
@@ -24,10 +17,9 @@ export class UserController {
   }
 
   @ApiOperation({ summary: '로그인' })
-  @UseGuards(LocalAuthGuard)
   @Post('login')
   @HttpCode(HttpStatus.OK)
-  async login(@Req() req) {
-    return this.authService.signToken(req.user);
+  async login(@Body() body: SignInDto): Promise<User> {
+    return this.authService.login(body.email, body.password);
   }
 }

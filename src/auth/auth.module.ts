@@ -13,7 +13,9 @@ import { UserRepository } from '../user/user.repository';
     PassportModule,
     JwtModule.register({
       secret: process.env.JWT_ACCESS_TOKEN_SECRET,
-      signOptions: { expiresIn: process.env.JWT_ACCESS_TOKEN_EXPIRATION_TIME },
+      signOptions: {
+        expiresIn: process.env.JWT_ACCESS_TOKEN_EXPIRATION_TIME + 's',
+      },
     }),
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],

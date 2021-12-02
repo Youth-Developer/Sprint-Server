@@ -7,6 +7,7 @@ import { UserRepository } from '../user/user.repository';
 import User from '../entities/User.entity';
 import { JwtService } from '@nestjs/jwt';
 import { RegisterDto } from '../user/dto/register.dto';
+import { JwtPayload } from './interfaces/jwt-payload';
 
 @Injectable()
 export class AuthService {
@@ -14,8 +15,8 @@ export class AuthService {
     private readonly userRepository: UserRepository,
     private readonly jwtService: JwtService,
   ) {}
-  async register(registerDto: RegisterDto): Promise<void> {
-    const { email, username, password } = registerDto;
+
+  async register({ email, username, password }: RegisterDto): Promise<void> {
     let user: User;
     user = await this.userRepository.findOne({ where: { email } });
     if (!user) {
@@ -28,7 +29,7 @@ export class AuthService {
     } else throw new BadRequestException('이미 등록된 사용자입니다.');
   }
 
-  async login(email: string, password: string): Promise<User> {
+  async login(email: string, password: string): Promise<any> {
     let user: User;
     try {
       user = await this.userRepository.findUser({ where: { email } });
@@ -42,16 +43,10 @@ export class AuthService {
         `Wrong password for user with email: ${email}`,
       );
     }
-    delete user.password;
-    return user;
-  }
-
-  async signToken(user: User) {
-    const payload = {
-      email: user.email,
-      sub: user.idx,
+    const payload: JwtPayload = {
+      iss: user.username,
+      sub: user.idx.toString(),
     };
-
     return {
       user,
       access_token: this.jwtService.sign(payload),
