@@ -15,7 +15,6 @@ export class AuthService {
     private readonly userRepository: UserRepository,
     private readonly jwtService: JwtService,
   ) {}
-
   async register({ email, username, password }: RegisterDto): Promise<void> {
     let user: User;
     user = await this.userRepository.findOne({ where: { email } });
@@ -43,13 +42,40 @@ export class AuthService {
         `Wrong password for user with email: ${email}`,
       );
     }
+    const JWT_ACCESS_TOKEN_EXPIRATION_TIME: string =
+      process.env.JWT_ACCESS_TOKEN_EXPIRATION_TIME;
+    const now: Date = new Date();
+    const validity: Date = new Date(
+      now.getTime() + Number(JWT_ACCESS_TOKEN_EXPIRATION_TIME),
+    );
     const payload: JwtPayload = {
-      iss: user.username,
-      sub: user.idx.toString(),
+      username: user.username,
+      userId: user.idx,
+      iat: now,
+      exp: validity,
     };
+    delete user.password;
     return {
       user,
-      access_token: this.jwtService.sign(payload),
+      access_token: this.jwtService.sign(payload, {
+        algorithm: 'HS256',
+        secret: process.env.JWT_ACCESS_TOKEN_SECRET,
+      }),
     };
+  }
+
+  async verifyPayload(payload: JwtPayload): Promise<User> {
+    let user: User;
+    try {
+      user = await this.userRepository.findUser({
+        where: { email: payload.sub },
+      });
+    } catch (error) {
+      throw new UnauthorizedException(
+        `There isn't any user with email: ${payload.sub}`,
+      );
+    }
+    delete user.password;
+    return user;
   }
 }
