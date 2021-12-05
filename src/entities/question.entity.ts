@@ -2,13 +2,16 @@ import {
   BaseEntity,
   Column,
   CreateDateColumn,
-  Entity, JoinColumn, ManyToOne, OneToMany,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import User from './user.entity';
 import Answer from './answer.entity';
-import QuestionPhoto from './questionPhoto.entity';
+import QuestionPhoto from './question-photo.entity';
 import Category from './category.entity';
 
 @Entity('question')
@@ -40,9 +43,9 @@ export default class Question extends BaseEntity {
   @OneToMany(() => Answer, (answer) => answer.question)
   answer: Answer[];
 
-  @OneToMany( () => QuestionPhoto, (questionPhoto) => questionPhoto.question)
+  @OneToMany(() => QuestionPhoto, (questionPhoto) => questionPhoto.question)
   questionPhoto: QuestionPhoto[];
 
-  @OneToMany( () => Category, (category) => category.question)
+  @OneToMany(() => Category, (category) => category.question)
   category: Category;
 }

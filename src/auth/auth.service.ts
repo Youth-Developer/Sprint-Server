@@ -4,7 +4,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { UserRepository } from '../user/user.repository';
-import User from '../entities/User.entity';
+import User from '../entities/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import { RegisterDto } from '../user/dto/register.dto';
 import { JwtPayload } from './interfaces/jwt-payload';
