@@ -9,18 +9,18 @@ async function bootstrap() {
   const app: NestApplication = await NestFactory.create(AppModule);
   const port: number = parseInt(process.env.PORT, 10) || 8080;
   app.useGlobalPipes(new ValidationPipe());
+  app.setGlobalPrefix('api');
   const config = new DocumentBuilder()
     .setTitle('Sprint')
     .setDescription('Sprint 프로젝트를 위한 API 문서')
     .setVersion('1.0')
-    .setBasePath('api')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
-  app.setGlobalPrefix('api');
+  SwaggerModule.setup('docs', app, document);
 
   await app.listen(port);
-  Logger.log(`Server is running on http://localhost:${port}/api`, 'Bootstrap');
+  Logger.log(`Server is running on http://localhost:${port}`, 'Bootstrap');
+  Logger.log(`http://localhost:${port}/docs`, 'SwaggerUI');
 
   if (module.hot) {
     module.hot.accept();
