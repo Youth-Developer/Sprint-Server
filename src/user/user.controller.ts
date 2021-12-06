@@ -1,6 +1,6 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { RegisterDto } from './dto/register.dto';
-import { ApiOperation } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthService } from '../auth/auth.service';
 import { SignInDto } from './dto/sign-in.dto';
 import User from '../entities/user.entity';
@@ -9,6 +9,7 @@ import User from '../entities/user.entity';
 export class UserController {
   constructor(private readonly authService: AuthService) {}
 
+  @ApiTags('SignUp')
   @ApiOperation({ summary: '회원가입' })
   @Post('signup')
   @HttpCode(HttpStatus.CREATED)
@@ -16,6 +17,7 @@ export class UserController {
     return await this.authService.register(registerDto);
   }
 
+  @ApiTags('Login')
   @ApiOperation({ summary: '로그인' })
   @Post('login')
   @HttpCode(HttpStatus.OK)
