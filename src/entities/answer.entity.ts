@@ -9,8 +9,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import Question from './Question.entity';
-import User from './User.entity';
+import Question from './question.entity';
+import User from './user.entity';
 import AnswerPhoto from './answer-photo.entity';
 
 @Entity('answer')
