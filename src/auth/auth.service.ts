@@ -42,23 +42,17 @@ export class AuthService {
         `Wrong password for user with email: ${email}`,
       );
     }
-    const JWT_ACCESS_TOKEN_EXPIRATION_TIME: string =
-      process.env.JWT_ACCESS_TOKEN_EXPIRATION_TIME;
-    const now: Date = new Date();
-    const validity: Date = new Date(
-      now.getTime() + Number(JWT_ACCESS_TOKEN_EXPIRATION_TIME),
-    );
     const payload: JwtPayload = {
+      iss: user.email,
       username: user.username,
       userId: user.idx,
-      iat: now,
-      exp: validity,
     };
     delete user.password;
     return {
       user,
       access_token: this.jwtService.sign(payload, {
         algorithm: 'HS256',
+        expiresIn: Number(process.env.JWT_ACCESS_TOKEN_EXPIRATION_TIME),
         secret: process.env.JWT_ACCESS_TOKEN_SECRET,
       }),
     };
