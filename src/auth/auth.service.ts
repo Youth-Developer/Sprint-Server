@@ -50,11 +50,7 @@ export class AuthService {
     delete user.password;
     return {
       user,
-      access_token: this.jwtService.sign(payload, {
-        algorithm: 'HS256',
-        expiresIn: Number(process.env.JWT_ACCESS_TOKEN_EXPIRATION_TIME),
-        secret: process.env.JWT_ACCESS_TOKEN_SECRET,
-      }),
+      access_token: this.jwtService.sign(payload),
     };
   }
 
@@ -62,12 +58,10 @@ export class AuthService {
     let user: User;
     try {
       user = await this.userRepository.findUser({
-        where: { email: payload.sub },
+        where: { email: payload.iss, username: payload.username },
       });
     } catch (error) {
-      throw new UnauthorizedException(
-        `There isn't any user with email: ${payload.sub}`,
-      );
+      throw new UnauthorizedException(`There isn't any user`);
     }
     delete user.password;
     return user;
