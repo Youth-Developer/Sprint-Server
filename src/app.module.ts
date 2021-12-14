@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AnswerModule } from './answer/answer.module';
-import { SettingsModule } from './settings/settings.module';
 import { DatabaseModule } from './database/database.module';
 import { QuestionPhotoModule } from './question-photo/question-photo.module';
 import { AnswerPhotoModule } from './answer-photo/answer-photo.module';
@@ -16,7 +15,6 @@ import { AuthModule } from './auth/auth.module';
       isGlobal: true,
     }),
     AnswerModule,
-    SettingsModule,
     DatabaseModule,
     QuestionPhotoModule,
     AnswerPhotoModule,
