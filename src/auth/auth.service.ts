@@ -5,30 +5,38 @@ import {
 } from '@nestjs/common';
 import { UserRepository } from '../user/user.repository';
 import User from '../entities/user.entity';
-import { JwtService } from '@nestjs/jwt';
 import { RegisterDto } from '../user/dto/register.dto';
-import { JwtPayload } from './interfaces/jwt-payload';
+import { TokenDto } from './dto/token.dto';
+import { TokenService } from '../token/token.service';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly userRepository: UserRepository,
-    private readonly jwtService: JwtService,
+    private readonly tokenService: TokenService,
   ) {}
-  async register({ email, username, password }: RegisterDto): Promise<void> {
+  async register({
+    email,
+    username,
+    password,
+  }: RegisterDto): Promise<TokenDto> {
     let user: User;
     user = await this.userRepository.findOne({ where: { email } });
     if (!user) {
+      const salt = await bcrypt.genSalt();
+      const hashedPassword = await bcrypt.hash(password, salt);
       user = await this.userRepository.create({
         email: email,
         username: username,
-        password: password,
+        password: hashedPassword,
       });
       await this.userRepository.save(user);
+      return await this.login(user.email, hashedPassword);
     } else throw new BadRequestException('이미 등록된 사용자입니다.');
   }
 
-  async login(email: string, password: string): Promise<any> {
+  async login(email: string, password: string): Promise<TokenDto> {
     let user: User;
     try {
       user = await this.userRepository.findUser({ where: { email } });
@@ -42,28 +50,15 @@ export class AuthService {
         `Wrong password for user with email: ${email}`,
       );
     }
-    const payload: JwtPayload = {
-      iss: user.email,
-      username: user.username,
-      userId: user.idx,
-    };
-    delete user.password;
+    const accessToken: string = this.tokenService.createAccessToken(
+      user.email,
+      user.username,
+    );
+    const refreshToken: string = this.tokenService.createRefreshToken();
     return {
-      user,
-      access_token: this.jwtService.sign(payload),
+      username: user.username,
+      accessToken: 'Bearer ' + accessToken,
+      refreshToken: 'Bearer ' + refreshToken,
     };
-  }
-
-  async verifyPayload(payload: JwtPayload): Promise<User> {
-    let user: User;
-    try {
-      user = await this.userRepository.findUser({
-        where: { email: payload.iss, username: payload.username },
-      });
-    } catch (error) {
-      throw new UnauthorizedException(`There isn't any user`);
-    }
-    delete user.password;
-    return user;
   }
 }

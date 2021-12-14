@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ExecutionContext,
   GoneException,
   Injectable,
@@ -6,43 +7,46 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import * as jwt from 'jsonwebtoken';
-import { AuthService } from '../auth.service';
+import User from '../../entities/user.entity';
 import { JwtPayload } from '../interfaces/jwt-payload';
+import { TokenService } from '../../token/token.service';
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
-  constructor(private readonly authService: AuthService) {
+  constructor(private readonly tokenService: TokenService) {
     super();
   }
-  async canActivate(context: ExecutionContext) {
+  canActivate(context: ExecutionContext) {
     const request = context.switchToHttp().getRequest();
     const { authorization } = request.headers;
 
     if (authorization === undefined) {
-      throw new UnauthorizedException('Token 전송 안됨');
+      throw new BadRequestException('Authorization 헤더가 비어있습니다.');
     }
 
-    const token = authorization.replace('Bearer ', '');
-    request.user = this.validateToken(token); // request.user 객체에 디코딩된 토큰(유저 정보)을 저장합니다.
+    const accessToken = authorization.replace('Bearer ', '');
+    request.user = this.validateToken(accessToken); // request.user 객체에 디코딩된 토큰(유저 정보)을 저장합니다.
     return true;
   }
 
-  async validateToken(token: string) {
-    const secretKey: string = process.env.JWT_ACCESS_TOKEN_SECRET;
+  validateToken(token: string, isRefresh = false): JwtPayload {
+    let verify: JwtPayload = null;
     try {
-      const payload: JwtPayload = jwt.verify(token, secretKey) as JwtPayload;
-      await this.authService.verifyPayload(payload);
-      return payload;
+      verify = this.tokenService.verify(token);
+      return verify;
     } catch (e) {
       switch (e.message) {
         // 토큰에 대한 오류를 판단합니다.
+        case 'invalid signature':
         case 'invalid token':
-        case 'token is array':
-        case `There isn't any user`:
+        case 'token malformed':
           throw new UnauthorizedException('유효하지 않은 토큰입니다.');
 
-        case 'jwt expired':
+        case 'token expired':
+          if (isRefresh) {
+            verify = this.tokenService.decode(token) as User;
+            return verify;
+          }
           throw new GoneException('만료된 토큰입니다.');
 
         default:
