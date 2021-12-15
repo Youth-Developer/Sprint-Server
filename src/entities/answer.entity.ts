@@ -4,13 +4,14 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  ManyToOne, OneToMany,
+  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import Question from './question.entity';
 import User from './user.entity';
-import AnswerPhoto from './answerPhoto.entity';
+import AnswerPhoto from './answer-photo.entity';
 
 @Entity('answer')
 export default class Answer extends BaseEntity {
@@ -36,11 +37,11 @@ export default class Answer extends BaseEntity {
   question: Question;
 
   @ManyToOne(() => User, (user) => user.answer, {
-    onDelete: 'CASCADE'
+    onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'user_idx' })
   user: User;
 
-  @OneToMany( () => AnswerPhoto, (answerPhoto) => answerPhoto.answer)
+  @OneToMany(() => AnswerPhoto, (answerPhoto) => answerPhoto.answer)
   answerPhoto: AnswerPhoto[];
 }
