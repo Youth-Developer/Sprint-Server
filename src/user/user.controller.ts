@@ -13,6 +13,7 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthService } from '../auth/auth.service';
 import { SignInDto } from './dto/sign-in.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { TokenDto } from '../auth/dto/token.dto';
 
 @Controller('user')
 export class UserController {
@@ -23,7 +24,7 @@ export class UserController {
   @Post('signup')
   @HttpCode(HttpStatus.CREATED)
   async signUp(@Body() registerDto: RegisterDto) {
-    const data = await this.authService.register(registerDto);
+    const data: TokenDto = await this.authService.register(registerDto);
     return {
       status: 200,
       message: '회원가입을 성공하였습니다.',
@@ -36,7 +37,10 @@ export class UserController {
   @Post('login')
   @HttpCode(HttpStatus.OK)
   async login(@Body() body: SignInDto) {
-    const data = await this.authService.login(body.email, body.password);
+    const data: TokenDto = await this.authService.login(
+      body.email,
+      body.password,
+    );
     return {
       status: 200,
       message: '로그인을 성공하였습니다.',
