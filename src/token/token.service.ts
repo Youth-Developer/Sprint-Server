@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { UserRepository } from '../user/user.repository';
-import { JwtPayload } from '../auth/interfaces/jwt-payload';
+import { JwtPayload } from '../common/interfaces/jwt-payload';
 import { JwtService } from '@nestjs/jwt';
 import * as jwt from 'jsonwebtoken';
+import { TokenDto } from './dto/token.dto';
 
 @Injectable()
 export class TokenService {
@@ -42,5 +43,13 @@ export class TokenService {
 
   decode(token: string): JwtPayload {
     return jwt.decode(token) as JwtPayload;
+  }
+
+  createTokens(email: string, username: string): TokenDto {
+    return {
+      username: username,
+      accessToken: this.createAccessToken(email, username),
+      refreshToken: this.createRefreshToken(),
+    };
   }
 }
