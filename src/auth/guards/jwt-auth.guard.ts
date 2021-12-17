@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import User from '../../entities/user.entity';
-import { JwtPayload } from '../interfaces/jwt-payload';
+import { JwtPayload } from '../../common/interfaces/jwt-payload';
 import { TokenService } from '../../token/token.service';
 
 @Injectable()
@@ -39,12 +39,12 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
         // 토큰에 대한 오류를 판단합니다.
         case 'invalid signature':
         case 'invalid token':
-        case 'token malformed':
+        case 'jwt malformed':
           throw new UnauthorizedException('유효하지 않은 토큰입니다.');
 
         case 'token expired':
           if (isRefresh) {
-            verify = this.tokenService.decode(token) as User;
+            verify = this.tokenService.decode(token);
             return verify;
           }
           throw new GoneException('만료된 토큰입니다.');
