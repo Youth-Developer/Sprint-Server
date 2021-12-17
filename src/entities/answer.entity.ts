@@ -15,19 +15,19 @@ import AnswerPhoto from './answer-photo.entity';
 
 @Entity('answer')
 export default class Answer extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn( { name: 'answer_idx'})
   idx: number;
 
-  @Column({ nullable: false })
+  @Column({ name: 'answer_contents', nullable: false })
   contents: string;
 
-  @Column({ nullable: false, default: 0 })
+  @Column({ name: 'answer_like', nullable: false, default: 0 })
   like: number;
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn({ name: 'answer_created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn({ name: 'answer_updated_at' })
   updatedAt: Date;
 
   @ManyToOne(() => Question, (question) => question.answer, {

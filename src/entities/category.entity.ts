@@ -12,7 +12,7 @@ export default class Category {
   @PrimaryGeneratedColumn()
   idx: number;
 
-  @Column({ nullable: false })
+  @Column({ name: 'category_name',nullable: false })
   name: string;
 
   @ManyToOne(() => Question, (question) => question.category, {

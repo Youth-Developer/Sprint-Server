@@ -16,22 +16,22 @@ import Category from './category.entity';
 
 @Entity('question')
 export default class Question extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'question_idx'})
   idx: number;
 
-  @Column({ nullable: false })
+  @Column({ name: 'question_title',nullable: false })
   title: string;
 
-  @Column({ nullable: false })
+  @Column({  name: 'question_contents', nullable: false })
   contents: string;
 
-  @Column({ nullable: false, default: 0 })
+  @Column({  name: 'question_like', nullable: false, default: 0 })
   like: number;
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn({ name: 'question_created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn({ name: 'question_updated_at' })
   updatedAt: Date;
 
   @ManyToOne(() => User, (user) => user.question, {

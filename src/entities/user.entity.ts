@@ -13,7 +13,7 @@ import Question from './question.entity';
 import Answer from './answer.entity';
 @Entity('user')
 export default class User extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'user_idx',})
   idx: number;
 
   @Column({ nullable: false, unique: true })
