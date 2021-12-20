@@ -11,6 +11,7 @@ import {
 import * as bcrypt from 'bcrypt';
 import Question from './question.entity';
 import Answer from './answer.entity';
+import { Exclude } from 'class-transformer';
 @Entity('user')
 export default class User extends BaseEntity {
   @PrimaryGeneratedColumn({ name: 'user_idx',})
@@ -33,6 +34,10 @@ export default class User extends BaseEntity {
 
   @Column({ nullable: true, default: null })
   discord_tag: string | null;
+
+  @Column({ name: 'current_hashed_refresh_token', nullable: true })
+  @Exclude()
+  currentHashedRefreshToken?: string;
 
   @OneToMany(() => Question, (question) => question.user)
   question: Question[];
