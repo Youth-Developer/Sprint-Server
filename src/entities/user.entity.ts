@@ -9,11 +9,11 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import Question from './Question.entity';
-import Answer from './Answer.entity';
+import Question from './question.entity';
+import Answer from './answer.entity';
 @Entity('user')
 export default class User extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'user_idx',})
   idx: number;
 
   @Column({ nullable: false, unique: true })
@@ -22,7 +22,7 @@ export default class User extends BaseEntity {
   @Column({ nullable: false, unique: true })
   username: string;
 
-  @Column({ nullable: false, unique: true, select: false })
+  @Column({ nullable: false, unique: true })
   password: string;
 
   @Column({ nullable: true, default: null })

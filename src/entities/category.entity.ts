@@ -5,14 +5,14 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import Question from './Question.entity';
+import Question from './question.entity';
 
 @Entity('Category')
 export default class Category {
   @PrimaryGeneratedColumn()
   idx: number;
 
-  @Column({ nullable: false })
+  @Column({ name: 'category_name',nullable: false })
   name: string;
 
   @ManyToOne(() => Question, (question) => question.category, {

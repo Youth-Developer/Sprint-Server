@@ -18,7 +18,7 @@ const ormconfig: TypeOrmModuleOptions = {
     migrationsDir: 'src/migration',
   },
   synchronize: false,
-  logging: true,
+  logging: false,
   keepConnectionAlive: true,
 };
 

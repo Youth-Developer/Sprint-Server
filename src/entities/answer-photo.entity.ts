@@ -1,5 +1,11 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import Answer from './Answer.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import Answer from './answer.entity';
 
 @Entity('answer_photo')
 export default class AnswerPhoto {
@@ -10,7 +16,7 @@ export default class AnswerPhoto {
   imagePath: string | null;
 
   @ManyToOne(() => Answer, (question) => question.answerPhoto, {
-    onDelete: 'CASCADE'
+    onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'answer_idx' })
   answer: Answer;

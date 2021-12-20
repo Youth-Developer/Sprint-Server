@@ -4,29 +4,30 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  ManyToOne, OneToMany,
+  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import Question from './Question.entity';
-import User from './User.entity';
-import AnswerPhoto from './AnswerPhoto.entity';
+import Question from './question.entity';
+import User from './user.entity';
+import AnswerPhoto from './answer-photo.entity';
 
 @Entity('answer')
 export default class Answer extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn( { name: 'answer_idx'})
   idx: number;
 
-  @Column({ nullable: false })
+  @Column({ name: 'answer_contents', nullable: false })
   contents: string;
 
-  @Column({ nullable: false, default: 0 })
+  @Column({ name: 'answer_like', nullable: false, default: 0 })
   like: number;
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn({ name: 'answer_created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn({ name: 'answer_updated_at' })
   updatedAt: Date;
 
   @ManyToOne(() => Question, (question) => question.answer, {
@@ -36,11 +37,11 @@ export default class Answer extends BaseEntity {
   question: Question;
 
   @ManyToOne(() => User, (user) => user.answer, {
-    onDelete: 'CASCADE'
+    onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'user_idx' })
   user: User;
 
-  @OneToMany( () => AnswerPhoto, (answerPhoto) => answerPhoto.answer)
+  @OneToMany(() => AnswerPhoto, (answerPhoto) => answerPhoto.answer)
   answerPhoto: AnswerPhoto[];
 }
