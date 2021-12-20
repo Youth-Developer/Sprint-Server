@@ -43,7 +43,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
         case 'Unexpected token': // 토큰의 형식이 원하는 형식과 맞지 않는 경우
           throw new UnauthorizedException('유효하지 않은 토큰입니다.');
 
-        case 'jwt expired':
+        case 'jwt expired': // 토큰이 만료되었을 경우
           if (isRefresh) {
             verify = this.tokenService.decode(token);
             return verify;
