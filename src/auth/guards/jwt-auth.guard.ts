@@ -7,7 +7,6 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import User from '../../entities/user.entity';
 import { JwtPayload } from '../../common/interfaces/jwt-payload';
 import { TokenService } from '../../token/token.service';
 
@@ -42,7 +41,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
         case 'jwt malformed':
           throw new UnauthorizedException('유효하지 않은 토큰입니다.');
 
-        case 'token expired':
+        case 'jwt expired':
           if (isRefresh) {
             verify = this.tokenService.decode(token);
             return verify;
