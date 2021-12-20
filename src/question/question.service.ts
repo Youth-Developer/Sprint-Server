@@ -2,9 +2,8 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { UserRepository } from '../user/user.repository';
 import { QuestionRepository } from './quesiton.repository';
 import { PostDto } from './dto/post.dto';
-import User from '../entities/User.entity';
-import Question from '../entities/Question.entity';
 import { CategoryService } from '../category/category.service';
+import User from '../entities/user.entity';
 
 @Injectable()
 export class QuestionService {
@@ -22,20 +21,14 @@ export class QuestionService {
     if (user === undefined) {
       throw new BadRequestException('존재하지 않는 유저입니다');
     }
-    const post: Question = await this.getQuestion(postDto, user);
-    await this.questionRepository.save(post);
+    const post = await this.questionRepository.save({
+      title: postDto.title,
+      contents: postDto.title,
+      createdAt: new Date(),
+      user: user
+    });
 
     await this.categoryService.createCategory(post, category);
     return userIdx;
-  }
-
-  async getQuestion(postDto: PostDto, user: User): Promise<Question> {
-    const question: Question = new Question();
-    const date = new Date();
-    question.title = postDto.title;
-    question.contents = postDto.contents;
-    question.createdAt = date;
-    question.user = await user;
-    return question;
   }
 }
