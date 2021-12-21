@@ -67,4 +67,8 @@ export default class User extends BaseEntity {
   async checkRefreshToken(plainRefreshToken: string): Promise<boolean> {
     return await bcrypt.compare(plainRefreshToken, this.refreshToken);
   }
+
+  async removeRefreshToken() {
+    return (this.refreshToken = null);
+  }
 }
