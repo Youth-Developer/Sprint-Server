@@ -63,4 +63,8 @@ export default class User extends BaseEntity {
     const salt = await bcrypt.genSalt();
     this.refreshToken = await bcrypt.hash(this.refreshToken, salt);
   }
+
+  async checkRefreshToken(plainRefreshToken: string): Promise<boolean> {
+    return await bcrypt.compare(plainRefreshToken, this.refreshToken);
+  }
 }
