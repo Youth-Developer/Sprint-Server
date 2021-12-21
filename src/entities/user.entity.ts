@@ -35,9 +35,13 @@ export default class User extends BaseEntity {
   @Column({ nullable: true, default: null })
   discord_tag: string | null;
 
-  @Column({ name: 'refresh_token', nullable: true })
+  @Column({
+    name: 'current_hashed_refresh_token',
+    nullable: true,
+    default: null,
+  })
   @Exclude()
-  refreshToken?: string;
+  currentHashedRefreshToken?: string;
 
   @OneToMany(() => Question, (question) => question.user)
   question: Question[];
@@ -57,18 +61,14 @@ export default class User extends BaseEntity {
     return await bcrypt.compare(plainPassword, this.password);
   }
 
-  @BeforeInsert()
-  @BeforeUpdate()
-  async hashRefreshToken(): Promise<void> {
-    const salt = await bcrypt.genSalt();
-    this.refreshToken = await bcrypt.hash(this.refreshToken, salt);
-  }
-
   async checkRefreshToken(plainRefreshToken: string): Promise<boolean> {
-    return await bcrypt.compare(plainRefreshToken, this.refreshToken);
+    return await bcrypt.compare(
+      plainRefreshToken,
+      this.currentHashedRefreshToken,
+    );
   }
 
   async removeRefreshToken() {
-    return (this.refreshToken = null);
+    return (this.currentHashedRefreshToken = null);
   }
 }
