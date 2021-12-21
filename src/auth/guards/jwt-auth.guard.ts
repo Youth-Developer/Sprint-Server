@@ -51,7 +51,6 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
           throw new GoneException('만료된 토큰입니다.');
 
         default:
-          console.log(e.message);
           throw new InternalServerErrorException('서버 오류입니다.');
       }
     }
