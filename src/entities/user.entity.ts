@@ -35,9 +35,9 @@ export default class User extends BaseEntity {
   @Column({ nullable: true, default: null })
   discord_tag: string | null;
 
-  @Column({ name: 'current_hashed_refresh_token', nullable: true })
+  @Column({ name: 'refresh_token', nullable: true })
   @Exclude()
-  currentHashedRefreshToken?: string;
+  refreshToken?: string;
 
   @OneToMany(() => Question, (question) => question.user)
   question: Question[];
