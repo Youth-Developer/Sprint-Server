@@ -8,11 +8,11 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { JwtPayload } from '../../common/interfaces/jwt-payload';
-import { TokenService } from '../../token/token.service';
+import * as jwt from 'jsonwebtoken';
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
-  constructor(private readonly tokenService: TokenService) {
+  constructor() {
     super();
   }
   canActivate(context: ExecutionContext) {
@@ -24,14 +24,15 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     }
 
     const accessToken = authorization.replace('Bearer ', '');
-    request.user = this.validateToken(accessToken); // request.user 객체에 디코딩된 토큰(유저 정보)을 저장합니다.
+    request.user = JwtAuthGuard.validateToken(accessToken); // request.user 객체에 디코딩된 토큰(유저 정보)을 저장합니다.
     return true;
   }
 
-  validateToken(token: string, isRefresh = false): JwtPayload {
+  static validateToken(token: string, isRefresh = false): JwtPayload | boolean {
     let verify: JwtPayload = null;
     try {
-      verify = this.tokenService.verify(token);
+      const secretKey: string = process.env.JWT_ACCESS_TOKEN_SECRET;
+      verify = jwt.verify(token, secretKey) as JwtPayload;
       return verify;
     } catch (e) {
       switch (e.message) {
@@ -45,8 +46,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 
         case 'jwt expired': // 토큰이 만료되었을 경우
           if (isRefresh) {
-            verify = this.tokenService.decode(token);
-            return verify;
+            return true;
           }
           throw new GoneException('만료된 토큰입니다.');
 
