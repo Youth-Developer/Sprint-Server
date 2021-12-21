@@ -36,15 +36,6 @@ export class TokenService {
     });
   }
 
-  verify(token: string): JwtPayload {
-    const secretKey: string = process.env.JWT_ACCESS_TOKEN_SECRET;
-    return jwt.verify(token, secretKey) as JwtPayload;
-  }
-
-  decode(token: string): JwtPayload {
-    return jwt.decode(token) as JwtPayload;
-  }
-
   createTokens(email: string, username: string): TokenDto {
     return {
       username: username,
