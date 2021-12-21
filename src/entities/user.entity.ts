@@ -56,4 +56,11 @@ export default class User extends BaseEntity {
   async checkPassword(plainPassword: string): Promise<boolean> {
     return await bcrypt.compare(plainPassword, this.password);
   }
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  async hashRefreshToken(): Promise<void> {
+    const salt = await bcrypt.genSalt();
+    this.refreshToken = await bcrypt.hash(this.refreshToken, salt);
+  }
 }
