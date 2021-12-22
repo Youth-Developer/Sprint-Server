@@ -16,12 +16,10 @@ export class AuthService {
     let user: User;
     user = await this.userRepository.findOne({ where: { email } });
     if (!user) {
-      const salt = await bcrypt.genSalt();
-      const hashedPassword = await bcrypt.hash(password, salt);
-      user = await this.userRepository.create({
+      user = this.userRepository.create({
         email: email,
         username: username,
-        password: hashedPassword,
+        password: password,
       });
       await this.userRepository.save(user);
     } else throw new BadRequestException('이미 등록된 사용자입니다.');
