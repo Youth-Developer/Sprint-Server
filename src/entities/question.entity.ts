@@ -28,7 +28,7 @@ export default class Question extends BaseEntity {
   @Column({  name: 'question_like', nullable: false, default: 0 })
   like: number;
 
-  @Column({ name: 'answerCount', nullable: false, default: 0})
+  @Column({ name: 'answer_count', nullable: false, default: 0})
   answerCount: number;
 
   @CreateDateColumn({ name: 'question_created_at' })
