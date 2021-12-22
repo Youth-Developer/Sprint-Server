@@ -16,7 +16,7 @@ export class AuthService {
     let user: User;
     user = await this.userRepository.findOne({ where: { email } });
     if (!user) {
-      user = await this.userRepository.create({
+      user = this.userRepository.create({
         email: email,
         username: username,
         password: password,
