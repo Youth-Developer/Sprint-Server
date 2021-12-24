@@ -14,7 +14,7 @@ import Answer from './answer.entity';
 import { Exclude } from 'class-transformer';
 @Entity('user')
 export default class User extends BaseEntity {
-  @PrimaryGeneratedColumn({ name: 'user_idx',})
+  @PrimaryGeneratedColumn({ name: 'user_idx' })
   idx: number;
 
   @Column({ nullable: false, unique: true })
