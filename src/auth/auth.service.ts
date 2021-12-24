@@ -6,7 +6,6 @@ import {
 import { UserRepository } from '../user/user.repository';
 import User from '../entities/user.entity';
 import { RegisterDto } from '../user/dto/register.dto';
-import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
