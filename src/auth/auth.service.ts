@@ -33,4 +33,11 @@ export class AuthService {
     }
     return user;
   }
+
+  async logout(idx: number): Promise<void> {
+    const user: User = await this.userRepository.findUser({
+      where: idx.toString(),
+    });
+    await user.removeRefreshToken();
+  }
 }
