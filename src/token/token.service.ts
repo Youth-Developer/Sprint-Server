@@ -26,8 +26,7 @@ export class TokenService {
     let verify: JwtPayload = null;
     let user: User = null;
     try {
-      const secretKey = process.env.JWT_REFRESH_TOKEN_SECRET;
-      verify = jwt.verify(token, secretKey) as JwtPayload;
+      verify = this.verify(token) as JwtPayload;
       if (isRefresh) {
         user = await this.userRepository.findUser({ where: verify.iss });
         await user.checkRefreshToken(token);
@@ -50,6 +49,11 @@ export class TokenService {
           throw new InternalServerErrorException('서버 오류입니다.');
       }
     }
+  }
+
+  verify(token: string): JwtPayload {
+    const secretKey: string = process.env.JWT_ACCESS_TOKEN_SECRET;
+    return jwt.verify(token, secretKey) as JwtPayload;
   }
 
   createAccessToken(email: string, username: string): string {
