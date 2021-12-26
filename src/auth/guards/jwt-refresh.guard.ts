@@ -4,11 +4,11 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { JwtAuthGuard } from './jwt-auth.guard';
+import { TokenService } from '../../token/token.service';
 
 @Injectable()
 export class JwtRefreshGuard extends AuthGuard('jwt-refresh-token') {
-  constructor() {
+  constructor(private readonly tokenService: TokenService) {
     super();
   }
   canActivate(context: ExecutionContext): boolean {
@@ -20,7 +20,7 @@ export class JwtRefreshGuard extends AuthGuard('jwt-refresh-token') {
     }
 
     const refreshToken = refresh.replace('Bearer ', '');
-    request.user = JwtAuthGuard.validateToken(refreshToken, true);
+    request.user = this.tokenService.validateToken(refreshToken, true);
     return true;
   }
 }
