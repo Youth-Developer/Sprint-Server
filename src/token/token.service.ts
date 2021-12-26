@@ -27,11 +27,11 @@ export class TokenService {
     let user: User = null;
     try {
       verify = this.verify(token) as JwtPayload;
+      user = await this.userRepository.findOne({ email: verify.iss });
       if (isRefresh) {
-        user = await this.userRepository.findUser({ where: verify.iss });
         await user.checkRefreshToken(token);
       }
-      return verify;
+      return user;
     } catch (e) {
       switch (e.message) {
         // 토큰에 대한 오류를 판단합니다.
