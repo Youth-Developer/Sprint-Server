@@ -1,17 +1,14 @@
 import {
   Body,
   Controller,
-  Get,
   HttpCode,
   HttpStatus,
   Post,
   UseGuards,
-  Request,
 } from '@nestjs/common';
 import { RegisterDto } from './dto/register.dto';
 import {
   ApiBadRequestResponse,
-  ApiBearerAuth,
   ApiBody,
   ApiCreatedResponse,
   ApiOkResponse,
@@ -21,7 +18,6 @@ import {
 } from '@nestjs/swagger';
 import { AuthService } from '../auth/auth.service';
 import { SignInDto } from './dto/sign-in.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { TokenDto } from '../token/dto/token.dto';
 import { TokenService } from '../token/token.service';
 import { LocalAuthGuard } from '../auth/guards/local-auth.guard';
@@ -73,15 +69,5 @@ export class UserController {
       message: '로그인을 성공하였습니다.',
       data,
     };
-  }
-
-  @ApiBearerAuth()
-  @ApiTags('Test')
-  @ApiOperation({ summary: 'profile' })
-  @ApiBearerAuth('accessToken')
-  @UseGuards(JwtAuthGuard)
-  @Get('profile')
-  profile(@Request() req) {
-    return req.user;
   }
 }
