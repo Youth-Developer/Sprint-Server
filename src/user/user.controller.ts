@@ -42,7 +42,7 @@ export class UserController {
   @HttpCode(HttpStatus.CREATED)
   async signUp(@Body() registerDto: RegisterDto) {
     await this.authService.register(registerDto);
-    const data: TokenDto = this.tokenService.createTokens(
+    const data: TokenDto = await this.tokenService.createTokens(
       registerDto.email,
       registerDto.username,
     );
@@ -64,7 +64,7 @@ export class UserController {
   @HttpCode(HttpStatus.OK)
   @UseGuards(LocalAuthGuard)
   async login(@User() user) {
-    const data: TokenDto = this.tokenService.createTokens(
+    const data: TokenDto = await this.tokenService.createTokens(
       user.email,
       user.username,
     );
