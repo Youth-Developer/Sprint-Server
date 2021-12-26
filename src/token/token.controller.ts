@@ -6,7 +6,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { JwtRefreshGuard } from '../auth/guards/jwt-refresh.guard';
-import { User } from '../common/decorators/user.decorator';
+import { UserDecorator } from '../common/decorators/user.decorator';
 import { TokenDto } from './dto/token.dto';
 import { TokenService } from './token.service';
 import {
@@ -31,7 +31,7 @@ export class TokenController {
   @HttpCode(HttpStatus.OK)
   @UseGuards(JwtRefreshGuard)
   @Get('refresh')
-  async refresh(@User() user) {
+  async refresh(@UserDecorator() user) {
     const data: TokenDto = await this.tokenService.createTokens(
       user.email,
       user.username,
