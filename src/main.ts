@@ -20,7 +20,7 @@ async function bootstrap() {
         scheme: 'bearer',
         bearerFormat: 'Token',
       },
-      'accessToken',
+      'AccessToken',
     )
     .build();
   const document = SwaggerModule.createDocument(app, config);

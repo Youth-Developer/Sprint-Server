@@ -5,8 +5,7 @@ import {
 } from '@nestjs/common';
 import { UserRepository } from '../user/user.repository';
 import User from '../entities/user.entity';
-import { RegisterDto } from '../user/dto/register.dto';
-import * as bcrypt from 'bcrypt';
+import { RegisterDto } from './dto/register.dto';
 
 @Injectable()
 export class AuthService {
@@ -26,19 +25,19 @@ export class AuthService {
   }
 
   async login(email: string, password: string): Promise<User> {
-    let user: User;
-    try {
-      user = await this.userRepository.findUser({ where: { email } });
-    } catch (err) {
-      throw new UnauthorizedException(
-        `There isn't any user with email: ${email}`,
-      );
-    }
+    const user: User = await this.userRepository.findUser({ where: { email } });
     if (!(await user.checkPassword(password))) {
       throw new UnauthorizedException(
         `Wrong password for user with email: ${email}`,
       );
     }
     return user;
+  }
+
+  async logout(idx: number): Promise<void> {
+    const user: User = await this.userRepository.findUser({
+      where: idx.toString(),
+    });
+    await user.removeRefreshToken();
   }
 }
