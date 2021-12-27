@@ -46,9 +46,7 @@ export default class Question extends BaseEntity {
   @OneToMany(() => QuestionPhoto, (questionPhoto) => questionPhoto.question)
   questionPhoto: QuestionPhoto[];
 
-  @OneToMany(() => Category, (category) => category.question, {
-    eager:true
-  })
+  @OneToMany(() => Category, (category) => category.question)
   @JoinColumn({ name: 'question_category'})
   category: Category[];
 }
