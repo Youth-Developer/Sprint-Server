@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { QuestionRepository } from './quesiton.repository';
 import Question from '../entities/question.entity';
-import { QuestionsDto } from './dto/find.dto';
+import { QuestionsDto } from './dto/questions.dto';
 import { CountDto } from './dto/count.dto';
 
 @Injectable()

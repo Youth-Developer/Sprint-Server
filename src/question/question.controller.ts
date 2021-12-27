@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { QuestionService } from './question.service';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { QuestionsDto } from './dto/find.dto';
+import { QuestionsDto } from './dto/questions.dto';
 
 @Controller('question')
 export class QuestionController {
