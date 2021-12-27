@@ -47,5 +47,6 @@ export default class Question extends BaseEntity {
   questionPhoto: QuestionPhoto[];
 
   @OneToMany(() => Category, (category) => category.question)
-  category: Category;
+  @JoinColumn({ name: 'question_category'})
+  category: Category[];
 }
