@@ -26,7 +26,7 @@ export class QuestionService {
       });
       questionsDto.title = title;
       questionsDto.contents = contents;
-      questionsDto.count = count[index].name;
+      questionsDto.count = +count[index].name;
       questionsDto.like = like;
       questionsDto.createdAt = createdAt;
       questionsDto.category = name;
