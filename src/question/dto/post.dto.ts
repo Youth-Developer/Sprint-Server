@@ -1,9 +1,8 @@
   import { ApiModelProperty } from '@nestjs/swagger/dist/decorators/api-model-property.decorator';
-  import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+  import { IsArray, IsNotEmpty, IsString } from 'class-validator';
 
   export class PostDto {
     //  *** jwt에서 유저 정보를 받아오는 것 대신, 유저의 idx를 임시적으로 받아서 테스트함. ***
-    @IsNumber()
     @ApiModelProperty({
       example: '1',
       description: '유저 IDX',
@@ -12,14 +11,7 @@
     userIdx!: number;
     //  *** jwt에서 유저 정보를 받아오는 것 대신, 유저의 idx를 임시적으로 받아서 테스트함. ***
 
-    @IsNumber()
-    @ApiModelProperty({
-      description: '질문글 IDX',
-      required: true,
-    })
-    questionIdx!: number;
-
-    @IsNotEmpty({ message: '제목을 입력해주세요!'})
+    @IsNotEmpty({ message: '제목을 입력해주세요!' })
     @IsString()
     @ApiModelProperty({
       example: 'TypeScript에서 declare가 뭔가요??',
@@ -39,11 +31,10 @@
     })
     contents!: string;
 
-
-    @IsString()
+    @IsArray()
     @ApiModelProperty({
       example: 'TypeScript',
       description: '카테고리',
     })
-    category: string;
+    category: string[];
   }
