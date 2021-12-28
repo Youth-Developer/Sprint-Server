@@ -6493,10 +6493,15 @@ webidl-conversions@^6.1.0:
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-6.1.0.tgz#9111b4d7ea80acd40f5270d666621afa78b69514"
   integrity sha512-qBIvFLGiBpLjfwmYAaHPXsn+ho5xZnGvyGvsarywGNc8VyQJUMHJ8OBKGGrPER0okBeMDaan4mNBlgBROxuI8w==
 
-webpack-node-externals@3.0.0, webpack-node-externals@^3.0.0:
+webpack-node-externals@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/webpack-node-externals/-/webpack-node-externals-3.0.0.tgz#1a3407c158d547a9feb4229a9e3385b7b60c9917"
   integrity sha512-LnL6Z3GGDPht/AigwRh2dvL9PQPFQ8skEpVrWZXLWBYmqcaojHNN0onvHzie6rq7EWKrrBfPYqNEzTJgiwEQDQ==
+
+webpack-pnp-externals@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/webpack-pnp-externals/-/webpack-pnp-externals-1.1.0.tgz#d827aa8753f28cdf581d3ab37c3c4c1f7ab7f062"
+  integrity sha512-jotzsud210jTpoCMvuJWlIb1EeXxlKHjBtK9iClUgehDVDcaeMOfvw5xCYUCen/QdqfJle8J6oiuP8gapu/Dzw==
 
 webpack-sources@^2.3.0:
   version "2.3.1"
